@@ -20,6 +20,10 @@ export default class CourseEditor
     this.setState({courseId: courseId});
   }
 
+  componentWillReceiveProps(newProps){
+        this.selectCourse(newProps.match.params.courseId);
+    }
+
   render() { return(
     <div>
       <h2>Editing course: {this.state.courseId}</h2>

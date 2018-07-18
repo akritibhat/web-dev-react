@@ -13,7 +13,8 @@ import App from "./examples/App";
 
 ReactDOM.render(
     <div className="container-fluid">
-        <CourseManager/>
+        <
+        CourseManager/>
     </div>,
     document.getElementById('root')
 );
