@@ -91,7 +91,8 @@ export default class ModuleList extends Component {
                 <button onClick={this.createModule} className="btn btn-primary btn-block">
                     <i className="fa fa-plus"></i>
                 </button>
-                <br/>
+
+                <div className="form-control-plaintext">
                 <ul className="list-group">
                     {this.state.modules.map((module)=>
                     <ModuleListItem module={module} courseId={this.state.courseId}
@@ -100,6 +101,7 @@ export default class ModuleList extends Component {
                     key={module.id}/>
                     )}
                 </ul>
+                </div>
             </div>
             </div>
         );

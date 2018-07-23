@@ -7,7 +7,6 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import Hello from './components/Hello'
 import Stateless from './components/Stateless'
 import ModuleListItem from "./components/ModuleListItem";
-import ModuleList2 from "./containers/ModuleList2"
 import App from "./examples/App";
 
 

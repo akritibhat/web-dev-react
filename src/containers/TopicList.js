@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import LessonTabs from '../containers/LessonTabs';
+import LessonTabs from '../components/LessonTabs';
 import TopicService from '../services/TopicService'
-import TopicPills from './TopicPills'
+import TopicPills from '../components/TopicPills'
 import LessonService from "../services/LessonService";
 
 export default class TopicList extends Component {
@@ -29,6 +29,7 @@ export default class TopicList extends Component {
         this.lessonService = LessonService.instance;
         this.topicService = TopicService.instance;
         this.titleChanged = this.titleChanged.bind(this);
+
     }
 
 
@@ -62,6 +63,9 @@ export default class TopicList extends Component {
             .then(topics=>{
                 this.setState({topics:topics});
             })
+        this.setState({newTopic: {  title: '' ,id :''
+
+            }})
     }
 
 
@@ -73,7 +77,6 @@ export default class TopicList extends Component {
     }
 
     createTopic() {
-        console.log(this.state.topic);
         this.topicService
             .createTopic(this.props.lessonId, this.state.newTopic)
             .then(newTopic  => this.topicService.findAllTopicsForLesson(this.props.lessonId))
@@ -97,27 +100,23 @@ export default class TopicList extends Component {
     render() {
         return (
             <div>
-                <div class="form-control-plaintext ">
-                <button onClick={this.deleteLesson} className="btn btn-danger btn-md">
-                    Delete This Lesson
-                </button>
+                <div className="form-control-plaintext ">
+
             </div>
-                <div className="form-control-plaintext">
-                    <h7>Topics for lesson: {this.state.lessonId}</h7>
-                </div>
 
-
-                <div class="form-row">
+                <div className="container-fluid form-row form-control-plaintext">
+                    <button onClick={this.deleteLesson} className="btn btn-danger btn-md col-5">
+                        Delete This Lesson
+                    </button>
                 <input onChange={this.titleChanged}
-                       placeholder="Enter New Topic"
-                       className="form-control col-8"/>
+                       placeholder="Add a New Topic"
+                       className="form-control col-5"/>
                 <button onClick={this.createTopic} className="btn btn-primary ">
                     <i className="fa fa-plus"></i>
                 </button>
                 </div>
 
-                <br/>
-                <ul className="nav nav-pills red">
+                <ul className="nav nav-pills " role="tablist">
 
                     {this.state.topics.map((topic)=>
                         <TopicPills lessonId={this.state.lessonId} courseId={this.state.courseId}

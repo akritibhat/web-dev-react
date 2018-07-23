@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LessonTabs from './LessonTabs'
+import LessonTabs from '../components/LessonTabs'
 import LessonList from "./LessonList";
 import ModuleService from "../services/ModuleService";
 import LessonEditor from "./LessonEditor";
@@ -42,8 +42,8 @@ export default class ModuleEditor
 
     updateModule = (newModule) => {
         this.moduleService.updateModule(this.state.moduleId,this.state.newModule)
-            .then(alert('Module Name Updated Successfully to: '+this.state.newModule.title))
-            .then(window.location.reload());
+            .then(window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}
+            /lesson`))
     };
 
 
@@ -53,14 +53,15 @@ export default class ModuleEditor
     }
 
     render() { return(
-        <div >
-            <h5>Editing module: {this.state.moduleId}</h5>
+
+        <div className="form-control-plaintext">
+
+            <h5>Selected module: {this.state.moduleId}</h5>
             <div className="form-row">
                 <input onChange={this.formChanged} placeholder='Enter New Name for Module' className="form-control col-4"/>
                 <button onClick={this.updateModule} className="btn btn-primary">Update Module Name</button>
             </div>
-            <br/>
-            <div>
+            <div className="form-control-plaintext">
                     <LessonList courseId={this.props.match.params.courseId} moduleId={this.props.match.params.moduleId}/>
                 </div>
                 <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic"

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LessonTabs from './LessonTabs'
+import LessonTabs from '../components/LessonTabs'
 import TopicList from "./TopicList";
 import LessonService from "../services/LessonService";
 import TopicEditor from './TopicEditor';
@@ -56,22 +56,23 @@ export default class LessonEditor
     updateLesson = (newModule) => {
         this.lessonService.updateLesson(this.state.lessonId,this.state.newLesson)
             .then(alert('Lesson Name Updated Successfully to: '+this.state.newLesson.title))
-            .then(window.location.reload());
+            .then(window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}
+            /lesson/${this.state.lessonId}/topic/`))
     };
 
 
     render() { return(
         <div>
-            <div class="form-control-plaintext">
+            <div className="form-control-plaintext">
             <h6>Welcome to Lesson: {this.state.lessonId}</h6>
             </div>
-            <div class="form-row">
+            <div className="form-row">
                 <input onChange={this.formChanged} placeholder='Change Lesson Name' className="form-control col-4"/>
                 <button onClick={this.updateLesson} className="btn btn-primary">
                     <i className="fa fa-check-circle"></i>
                 </button>
             </div>
-            <div className="row">
+            <div className="form-row">
 
                    <TopicList courseId={this.props.match.params.courseId}
                                moduleId={this.props.match.params.moduleId}

@@ -1,6 +1,6 @@
 import React from 'react'
 import ModuleList from './ModuleList'
-import LessonTabs from './LessonTabs'
+import LessonTabs from '../components/LessonTabs'
 import CourseService from "../services/CourseService";
 import ModuleEditor from "./ModuleEditor";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
@@ -38,14 +38,14 @@ export default class CourseEditor
 
     updateCourse = (newCourse) => {
         this.courseService.updateCourse(this.state.courseId,this.state.newCourse)
-            .then(alert('Course Name Updated Successfully to: '+this.state.newCourse.title))
+            .then(alert('Course Name Updated Successfully' ))
     };
 
 
     render() { return(
         <Router>
-            <div class="row">
-            <div className="col-4">
+            <div className="row">
+            <div className="col-4 form-control-plaintext">
             <h3>Editing course: {this.state.courseId}</h3>
                 <div className="form-row">
             <input onChange={this.formChanged} placeholder='Enter New Name for Course' className="form-control col-8"/>
@@ -55,7 +55,7 @@ export default class CourseEditor
             <ModuleList courseId={this.state.courseId}/>
 
             </div>
-            <div  class="right-div" className="col-8">
+            <div  className="right-div col-8">
                 <Route path="/course/:courseId/module/:moduleId/lesson"
                        component={ModuleEditor}>
                 </Route>

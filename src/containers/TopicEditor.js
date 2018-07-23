@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LessonTabs from './LessonTabs'
+import LessonTabs from '../components/LessonTabs'
 import TopicList from "./TopicList";
 import TopicService from "../services/TopicService";
 
@@ -62,8 +62,8 @@ export default class TopicEditor
 
     updateTopic = (newTopic) => {
         this.topicService.updateTopic(this.state.topicId,this.state.newTopic)
-            .then(alert('Topic Name Updated Successfully to: '+this.state.newTopic.title))
-            .then(window.location.reload());
+            .then(window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}
+            /lesson/${this.state.lessonId}/topic/${this.state.topicId}/pills`))
     };
 
     deleteTopic = (event) => {
@@ -76,7 +76,7 @@ export default class TopicEditor
     render() { return(
         <div>
             <h6>Editing Topic: {this.state.topicId}</h6>
-            <div class="form-row">
+            <div className="form-row container-fluid">
                 <input onChange={this.formChanged} placeholder='Topic Name' className="form-control col-2"/>
                 <button onClick={this.updateTopic} className="btn btn-primary">Update Topic</button>
                 <button onClick={this.deleteTopic} className="btn btn-danger">Delete Topic</button>

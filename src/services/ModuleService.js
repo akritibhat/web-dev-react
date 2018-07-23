@@ -1,10 +1,10 @@
 import CourseService from "./CourseService";
 
 const MODULE_API_URL =
-  'http://localhost:8080/api/course/CID/module';
+  'https://hw1akriti.herokuapp.com/api/course/CID/module';
 
 const MODULE_DELETE_URL =
-    'http://localhost:8080/api/module';
+    'https://hw1akriti.herokuapp.com/api/module';
 
 
 let _singleton = Symbol();

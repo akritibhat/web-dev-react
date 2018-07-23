@@ -1,9 +1,9 @@
 
 const LESSON_API_URL =
-    'http://localhost:8080/api/course/CID/module/MID/lesson';
+    'https://hw1akriti.herokuapp.com/api/course/CID/module/MID/lesson';
 
 const LESSON_CHG_URL =
-    'http://localhost:8080/api/lesson';
+    'https://hw1akriti.herokuapp.com/api/lesson';
 
 let _singleton = Symbol();
 export default class LessonService {

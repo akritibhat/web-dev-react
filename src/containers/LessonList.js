@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import LessonTabs from '../containers/LessonTabs';
+import LessonTabs from '../components/LessonTabs';
 import LessonService from '../services/LessonService'
 
 
@@ -49,6 +49,9 @@ export default class LessonList extends Component {
             .then(lessons=>{
                 this.setState({lessons:lessons});
             })
+        this.setState({newLesson: {  title: '' ,id :''
+
+            }})
     }
     componentWillReceiveProps(newProps){
         this.setModuleId(newProps.moduleId);
@@ -57,7 +60,6 @@ export default class LessonList extends Component {
     }
 
     createLesson() {
-        console.log(this.state.lesson);
         this.lessonService
             .createLesson(this.props.courseId,this.props.moduleId, this.state.newLesson)
             .then(newLesson  => this.lessonService.findAllLessonsForModule(this.props.courseId, this.props.moduleId))
@@ -81,7 +83,7 @@ export default class LessonList extends Component {
     render() {
         return (
             <div>
-                <h5>Lesson List for Module: {this.state.moduleId}</h5>
+
                 <div className="form-row">
                 <input onChange={this.titleChanged}
                        placeholder="Add New Lesson Here!!"
@@ -92,7 +94,7 @@ export default class LessonList extends Component {
                 </button>
                 </div>
                 <br/>
-                <ul className="nav nav-tabs">
+                <ul className="nav nav-tabs font-weight-bold">
                     {this.state.lessons.map((lesson)=>
                         <LessonTabs lesson={lesson} courseId={this.state.courseId}
                                         moduleId={this.state.moduleId}

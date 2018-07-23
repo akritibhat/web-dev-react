@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import CourseCard from '../components/CourseCard'
 import ModuleList from './ModuleList'
-import LessonTabs from './LessonTabs'
+import LessonTabs from '../components/LessonTabs'
 import CourseEditor from './CourseEditor'
 import ModuleEditor from './ModuleEditor'
 import CourseList from "./CourseList";
@@ -16,8 +16,9 @@ export default class CourseManager
 
         <div className="container-fluid">
 
-          <h1 align="left">Course Manager</h1>
+          <h6 align="left">Course Manager</h6>
 
+            <a href={"/courses"} > <button type="button"  className="btn btn-primary btn-lg btn-block">Get Courses</button></a>
           <Route path="/courses"
                  component={CourseList}>
           </Route>

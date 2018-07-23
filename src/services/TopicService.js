@@ -1,9 +1,9 @@
 
 const TOPIC_API_URL =
-    'http://localhost:8080/api/lesson/LID/topic';
+    'https://hw1akriti.herokuapp.com/api/lesson/LID/topic';
 
 const TOPIC_CHG_URL =
-    'http://localhost:8080/api/topic';
+    'https://hw1akriti.herokuapp.com/api/topic';
 
 let _singleton = Symbol();
 export default class TopicService {
