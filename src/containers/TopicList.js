@@ -87,7 +87,7 @@ export default class TopicList extends Component {
         if (window.confirm('Are you sure you wish to delete this Lesson?'))
         this.lessonService
             .deleteLesson(this.props.lessonId)
-            .then(window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}/lesson/`))
+            .then(()=>{window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}/lesson/`)})
     }
 
     titleChanged(event) {

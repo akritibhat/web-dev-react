@@ -69,7 +69,7 @@ export default class TopicEditor
     deleteTopic = (event) => {
         if (window.confirm('Are you sure you wish to delete this Topic?'))
         this.topicService.deleteTopic(this.state.topicId)
-            .then(window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}/lesson/${this.state.lessonId}/topic`))
+            .then(()=>{window.location.replace(`/course/${this.state.courseId}/module/${this.state.moduleId}/lesson/${this.state.lessonId}/topic`)})
     };
 
 
