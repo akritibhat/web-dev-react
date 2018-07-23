@@ -1,32 +1,30 @@
 import React from 'react';
-import CourseEditor from "../containers/CourseEditor";
-import ModuleEditor from "../containers/ModuleEditor";
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 
 export default class ModuleListItem
   extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+
+    render() {
     return (
-        <Router>
-            <li className="list-group-item">
 
-          <Link to={`/module/lessons/${this.props.module.id}`}>
+      <li className="list-group-item">
+
+          <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson`}>
               {this.props.module.title}
+              <button className="btn float-right"><i className="fa fa-pencil"></i></button>
           </Link>
-          <Route path="/module/lessons/:moduleId"
-                 component={ModuleEditor}>
-          </Route>
-        <span className="float-right">
 
-          <i className="fa fa-trash"></i>
-          <i className="fa fa-pencil"></i>
-        </span>
-         </li>
-        </Router>
+
+          <button className="btn float-right"
+                  onClick={(e) => { if (window.confirm('Are you sure you wish to delete this module?'))
+                      this.props.deleteModule(this.props.module.id)}}>
+                  <i className="fa fa-trash"></i></button>
+      </li>
+
     );
   }
 }
+
+
+

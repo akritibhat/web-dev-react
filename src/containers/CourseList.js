@@ -4,6 +4,7 @@ import CourseRow from '../components/CourseRow'
 import CourseService from '../services/CourseService';
 
 class CourseList extends React.Component {
+
     constructor() {
         super();
         this.courseService = CourseService.instance;
@@ -21,9 +22,6 @@ class CourseList extends React.Component {
             });
     }
 
-
-
-
     formChanged = (event) => {
         console.log(event.target.value);
         this.setState({newCourse: {
@@ -33,6 +31,12 @@ class CourseList extends React.Component {
 
     deleteCourse = (courseId) => {
         this.courseService.deleteCourse(courseId)
+            .then(() => this.courseService.findAllCourses())
+            .then(courses => this.setState({courses: courses}))
+    };
+
+    updateCourse = (courseId,newCourse) => {
+        this.courseService.updateCourse(courseId,newCourse)
             .then(() => this.courseService.findAllCourses())
             .then(courses => this.setState({courses: courses}))
     };
@@ -67,6 +71,7 @@ class CourseList extends React.Component {
                     {this.state.courses.map((course, index) =>
                         <CourseRow key={index}
                                    deleteCourse={this.deleteCourse}
+                                   updateCourse={this.updateCourse}
                                    course={course}/>)}
                     </tbody>
                 </table>

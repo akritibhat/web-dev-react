@@ -37,5 +37,16 @@ class CourseService {
                 return response;
             });
     }
+
+    updateCourse(courseId,course) {
+        return fetch(COURSE_API_URL + '/' + courseId, {
+            body: JSON.stringify(course),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(function (response) {
+            return response.json();
+        })}
 }
 export default CourseService;

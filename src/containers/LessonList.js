@@ -4,73 +4,102 @@ import LessonService from '../services/LessonService'
 
 
 export default class LessonList extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
+            courseId: '',
             moduleId: '',
-            lesson: { title: '' },
+            newLesson:'',
+            lesson: { title: '' ,id :''},
             lessons: [
 
             ]
         };
         this.createLesson = this.createLesson.bind(this);
-        this.titleChanged = this.titleChanged.bind(this);
-
         this.setModuleId =
             this.setModuleId.bind(this);
-
         this.lessonService = LessonService.instance;
+        this.titleChanged = this.titleChanged.bind(this);
     }
+
     setLessons(lessons) {
         this.setState({lessons: lessons})
     }
-    findAllLessonsForModule(moduleID) {
+
+    findAllLessonsForModule(courseId,moduleId) {
         this.lessonService
-            .findAllLessonsForModule(moduleID)
+            .findAllLessonsForModule(courseId,moduleId)
             .then((lessons) => {this.setLessons(lessons)});
     }
 
-    setModuleId(moduleID) {
-        this.setState({moduleID: moduleID});
+
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
     }
+
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
+    }
+
     componentDidMount() {
-        this.setModuleId(this.props.moduleID);
+        this.setModuleId(this.props.moduleId);
+        this.setCourseId(this.props.courseId);
+        this.lessonService.findAllLessonsForModule(this.props.courseId,this.props.moduleId)
+            .then(lessons=>{
+                this.setState({lessons:lessons});
+            })
     }
     componentWillReceiveProps(newProps){
-        this.setModuleId(newProps.moduleID);
-        this.findAllLessonsForModule(newProps.moduleID)
+        this.setModuleId(newProps.moduleId);
+        this.setCourseId(newProps.courseId);
+        this.findAllLessonsForModule(newProps.courseId,newProps.moduleId)
     }
 
     createLesson() {
         console.log(this.state.lesson);
         this.lessonService
-            .createModule(this.props.moduleID, this.state.lesson)
+            .createLesson(this.props.courseId,this.props.moduleId, this.state.newLesson)
+            .then(newLesson  => this.lessonService.findAllLessonsForModule(this.props.courseId, this.props.moduleId))
+            .then(lessons => this.setState({lessons: lessons}))
     }
-    titleChanged(event) {
-        console.log(event.target.value);
-        this.setState({module: {title: event.target.value}});
-    }
+
+
     renderListOfLessons() {
         let lessons = this.state.lessons.map(function(lesson){
             return <LessonTabs lesson={lesson}
-                                   key={lesson.id}/>
+                               key={lesson.id}/>
         });
         return lessons;
     }
+
+    titleChanged(event) {
+        console.log(event.target.value);
+        this.setState({newLesson: {title: event.target.value}});
+    }
+
     render() {
         return (
             <div>
-                <h3>Module List for course: {this.state.moduleId}</h3>
+                <h5>Lesson List for Module: {this.state.moduleId}</h5>
+                <div className="form-row">
                 <input onChange={this.titleChanged}
+                       placeholder="Add New Lesson Here!!"
+                       className="form-control col-4"/>
 
-                       placeholder="title"
-                       className="form-control"/>
-                <button onClick={this.createLesson} className="btn btn-primary btn-block">
+                <button onClick={this.createLesson} className="btn btn-dark">
                     <i className="fa fa-plus"></i>
                 </button>
+                </div>
                 <br/>
-                <ul className="list-group">
-                    {this.renderListOfLessons()}
+                <ul className="nav nav-tabs">
+                    {this.state.lessons.map((lesson)=>
+                        <LessonTabs lesson={lesson} courseId={this.state.courseId}
+                                        moduleId={this.state.moduleId}
+
+                                        key={lesson.id}/>
+                    )}
+
                 </ul>
             </div>
         );
