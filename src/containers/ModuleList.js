@@ -66,6 +66,8 @@ export default class ModuleList extends Component {
         this.moduleService.deleteModule(moduleId)
             .then(module  => this.moduleService.findAllModulesForCourse(this.props.courseId))
             .then(modules => this.setState({modules: modules}))
+            .then(()=>
+            {window.location.replace(`/course/${this.state.courseId}/module/`)})
     };
 
 

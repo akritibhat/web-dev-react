@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 
 
 export default class ModuleListItem
@@ -19,10 +19,9 @@ export default class ModuleListItem
 
       <li className="list-group-item highlightclass">
 
-          <Link  onClick={this.highlight} to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson`}>
+          <NavLink  onClick={this.highlight} to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson`}>
               {this.props.module.title}
-              <button className="btn float-right"><i className="fa fa-pencil"></i></button>
-          </Link>
+          </NavLink>
 
 
           <button className="btn float-right"

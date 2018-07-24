@@ -10,17 +10,17 @@ export default class LessonTabs
         this.highlight = this.highlight.bind(this);
     }
 
-    highlight(event) {
-        var parent=event.target.parentNode;
-        event.target.style.backgroundColor="cyan";
-        var n=parent.height;
 
+
+    highlight(event){
+        var p= event.target.parentNode ;
+        event.target.style.color="Red";
     }
 
   render() { return(
       <li className="nav-item font-weight-bold">
 
-          <a className="nav-link active" onClick={this.highlight}
+          <a className="nav-link active highlightclass" onClick={this.highlight}
              href={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}/topic`}>{this.props.lesson.title}</a>
           </li>
 

@@ -5,6 +5,7 @@ import LessonList from "./LessonList";
 import ModuleService from "../services/ModuleService";
 import LessonEditor from "./LessonEditor";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { History } from "react-router"
 
 export default class ModuleEditor
     extends React.Component {
@@ -32,6 +33,8 @@ export default class ModuleEditor
         this.setState({courseId: courseId});
     }
 
+
+
     formChanged = (event) => {
         console.log(event.target.value);
         console.log(this.state.moduleId);
@@ -50,6 +53,7 @@ export default class ModuleEditor
     componentWillReceiveProps(newProps){
         this.selectModule(newProps.match.params.moduleId);
         this.selectCourse(newProps.match.params.courseId);
+
     }
 
     render() { return(
